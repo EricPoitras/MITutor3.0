@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
+      
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>MITutor v3.0</title>
+  </head>
+  <body>
+    <nav id="section_nav" class="pl-2 pr-2 d-flex flex-row">
+        <div class="mr-auto p-2">
+            <img src="asset/logo.png" height="40px" width="auto">
+        </div>
+        <div class="p-2">
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button id="btn_settings_dashboard" class="dropdown-item" type="button" disabled>Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="section_main" class="container-fluid d-none">
+        <div class="row justify-content-center align-items-center h-100">
+            <div style="margin-bottom: 20%" class="col-md-6 col-sm-12 text-center">
+                <button id="btn_sign_in" type="button" class="btn btn-danger btn-lg mb-3"><i class="fas fa-sign-in-alt mr-2"></i>Sign in with MITutor</button>
+                <h4 class="mb-3 d-none d-sm-block">A better way to learn about motivational interviewing</h4>
+            </div>
+        </div>  
+    </div>
+    <div id="section_dashboard" class="container-fluid d-none" style="overflow-y:scroll;">
+        <div id="alert_dashboard_success" class="alert alert-success alert-dismissible fade show d-none pl-0" role="alert" style="position:absolute;margin-left:5%;margin-right:5%;margin-top:75px;width:90%">
+              <img src="asset/success.svg" width="75px" height="auto" style="float:left;">
+              <p class="ml-3"><strong>COMPLETED!</strong> You have successsfully completed all the problems for the Motivational Interviewing module.</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        <div id="alert_dashboard_warning" class="alert alert-warning alert-dismissible fade show d-none" role="alert" style="position:absolute;margin-left:5%;margin-right:5%;margin-top:75px;width:90%">
+              <img src="asset/technical-support.svg" width="75px" height="auto" style="float:left;margin-right:8px;">
+              <p><strong>NOTIFICATION</strong> You are currently logged in as Fall 2019 test user with the assigned role of instructor. Although you have access to all the functionalities, your data will not be stored after the session is completed. Any new problem created or log user interaction data will be erased at the end of the session.</p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        <div style="height: calc(100vh - 50px);" class="row justify-content-center align-items-center">
+            <div class="col-auto">
+                <div class="card mt-3 mb-3">
+                    <img style="height:200px;width:200px;padding:10px;margin:auto;border-color:red;" class="card-img-top" src="asset/goal.svg">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <h5 class="card-title">MITutor</h5>
+                            <p class="card-text text-justified" style="max-width:200px;">Get feedback on motivational interviewing</p>
+                            <button id="btn_mitutor" type="button" class="btn btn-danger w-100">Get Started</button>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="card mt-3 mb-3">
+                    <img style="height:200px;width:200px;padding:10px;margin:auto;border-color:red;" class="card-img-top" src="asset/create.svg">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <h5 class="card-title">MICreator</h5>
+                            <p class="card-text text-justified" style="max-width:200px;">Add new problems for students to solve</p>
+                            <button id="btn_micreator" type="button" class="btn btn-danger w-100">Get Started</button>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="card mt-3 mb-3">
+                    <img style="height:200px;width:200px;padding:10px;margin:auto;border-color:red;" class="card-img-top" src="asset/speedometer.svg">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <h5 class="card-title">MIDash</h5>
+                            <p class="card-text text-justified" style="max-width:200px;">Track student progress in mastering skills</p>
+                            <button id="btn_midash" type="button" class="btn btn-danger w-100">Get Started</button>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="section_mitutor" class="container-fluid d-none">
+        <div style="height: 50px" class="row justify-content-between">
+            <div class="col-1">
+                <h4 class="mb-0 mt-2 d-inline">MITutor</h4>
+            </div>
+            <div class="col-2">
+                <div class="btn-group float-right">
+                    <button id="btn_mitutor_mod" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-list mr-2"></i>Module
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- Progress Indicator 1 -->
+                        <h6 id="problem_module_1" class="dropdown-header">Module title 1</h6>
+                        <div class="progress m-1">
+                          <div id="bar_mitutor_mod_1" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <button id="btn_mitutor_mod_1" class="dropdown-item d-none" type="button">Module 1 call to action</button>
+                        <!-- Progress Indicator 2 -->
+                        <h6 id="problem_module_2" class="dropdown-header">Module title 2</h6>
+                        <div class="progress m-1">
+                          <div id="bar_mitutor_mod_2" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <button id="btn_mitutor_mod_2" class="dropdown-item d-none" type="button">Module 2 call to action</button>
+                        <h6 id="problem_module_3" class="dropdown-header">Module title 3</h6>
+                        <div class="progress m-1">
+                          <div id="bar_mitutor_mod_3" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <button id="btn_mitutor_mod_3" class="dropdown-item d-none" type="button">Module 3 call to action</button>
+                        <div class="dropdown-divider"></div>
+                        <button id="btn_mitutor_showmore" class="dropdown-item text-danger" type="button"><i class="fas fa-sort-amount-down-alt mr-2"></i>Show More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center" style="overflow-y:scroll;height: calc(100vh - 100px);background-color:rgb(227,227,227);">
+            <div class="col-sm-12 col-md-4">
+                <!-- TO DO: Add html content for MITUtor conversation with agent and controls -->
+                <div>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <p id="problem_instruction_message" class="mb-0">Instruction is shown here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="cont_problem_client" class="preview_statement" style="margin-top: 50px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <img id="problem_client_avatar" src="asset/avatar1.png" height="50px" width="auto">
+                            <p id="problem_client_statement" class="mb-0">Statement content is shown here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="cont_problem_therapist" class="preview_solution" style="margin-top: 50px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <img id="problem_therapist_avatar" src="asset/avatar1.png" height="50px" width="auto">
+                            <p id="problem_therapist_statement" class="mb-0">Statement content is shown here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="problem_positive_message" class="alert alert-success" role="alert">
+                    <p class="mb-0">Positive message</p>
+                </div>
+                <div id="problem_negative_message" class="alert alert-danger" role="alert">
+                    <p class="mb-0">Negative message</p>
+                </div>
+                <div id="problem_hint_1_message" class="alert alert-info" role="alert">
+                    <p class="mb-0">Hint message</p>
+                </div>
+                <div id="problem_hint_2_message" class="alert alert-info" role="alert">
+                    <p class="mb-0">Hint message</p>
+                </div>
+                <div id="problem_hint_3_message" class="alert alert-info" role="alert">
+                    <p class="mb-0">Hint message</p>
+                </div>
+                <div id="problem_validation_message" class="alert alert-warning" role="alert">
+                    <p class="mb-0">Validation message</p>
+                </div>
+                <div id="cont_problem_response" class="card mb-3">
+                    <div class="card-body">
+                        <div id="cont_problem_radio_1" class="form-check">
+                          <input class="form-check-input" type="radio" name="problem_radio" id="problem_radio_1" value="option1" checked>
+                          <label id="problem_radio_1_label" class="form-check-label" for="problem_radio_1">
+                            You’re just worn out
+                          </label>
+                        </div>
+                        <div id="cont_problem_radio_2" class="form-check mt-1">
+                          <input class="form-check-input" type="radio" name="problem_radio" id="problem_radio_2" value="option2">
+                          <label id="problem_radio_2_label" class="form-check-label" for="problem_radio_2">
+                            How did you sleep last night
+                          </label>
+                        </div>
+                        <div id="cont_problem_radio_3" class="form-check mt-1">
+                          <input class="form-check-input" type="radio" name="problem_radio" id="problem_radio_3" value="option3">
+                          <label id="problem_radio_3_label" class="form-check-label" for="problem_radio_3">
+                            Are you taking your medication
+                          </label>
+                        </div>
+                        <div id="cont_problem_radio_4" class="form-check mt-1">
+                          <input class="form-check-input" type="radio" name="problem_radio" id="problem_radio_4" value="option4">
+                          <label id="problem_radio_4_label" class="form-check-label" for="problem_radio_4">
+                            Are you taking your medication
+                          </label>
+                        </div>
+                        <div id="cont_problem_textarea" class="form-group">
+                            <textarea class="form-control" id="problem_textarea" rows="3" placeholder="Example textarea"></textarea>
+                        </div>
+                        <div id="cont_problem_controls" class="btn-group-vertical w-100 mt-3" role="group" aria-label="Basic example">
+                          <button id="problem_controls_submit" type="button" class="btn btn-danger">SUBMIT</button>
+                          <button id="problem_controls_hint" type="button" class="btn btn-danger">HINT</button>
+                          <button id="problem_controls_repeat" type="button" class="btn btn-danger">REPEAT</button>
+                          <button id="problem_controls_next" type="button" class="btn btn-danger">NEXT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="section_micreator" class="container-fluid d-none">
+        <div style="height: 50px" class="row">
+            <div class="col-1">
+                <h4 class="mb-0 mt-2 d-inline">MICreator</h4>
+            </div>
+            <div class="col-7">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <button id="btn_micreator_dropdown" type="button" class="btn btn-outline-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <!--<span class="sr-only">Toggle Dropdown</span>-->
+                    </button>
+                    <div class="dropdown-menu" style="width:100%;">
+                      <button id="btn_micreator_search1" class="dropdown-item d-none" type="button">Search result problem 1</button>
+                      <button id="btn_micreator_search2" class="dropdown-item d-none" type="button">Search result problem 2</button>
+                      <button id="btn_micreator_search3" class="dropdown-item d-none" type="button">Search result problem 3</button>
+                      <div role="separator" class="dropdown-divider"></div>
+                      <button id="btn_micreator_showmore" class="dropdown-item text-danger" type="button" disabled><i class="fas fa-sort-amount-down-alt mr-2"></i>Show More</button>
+                    </div>
+                  </div>
+                  <input id="input_micreator_query" type="text" class="form-control" placeholder="Search for problems" aria-label="Problem description" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                      <button id="btn_micreator_search" class="btn btn-outline-danger" type="button"><i class="fas fa-search"></i></button>
+                  </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="btn-group w-100" role="group" aria-label="Basic example">
+                  <button id="btn_micreator_previous" type="button" class="btn btn-danger" disabled><i class="fas fa-chevron-left mr-2"></i>Previous</button>
+                  <button id="btn_micreator_next" type="button" class="btn btn-danger">Next<i class="fas fa-chevron-right ml-2"></i></button>
+                  <button id="btn_micreator_update" type="button" class="btn btn-danger"><i class="fas fa-pen-alt mr-2"></i>Update</button>
+                  <button id="btn_micreator_delete" type="button" class="btn btn-danger"><i class="fas fa-trash mr-2"></i>Delete</button>
+                  <button id="btn_micreator_save" type="button" class="btn btn-danger d-none"><i class="fas fa-pen mr-2"></i>Save</button>
+                  <button id="btn_micreator_new" type="button" class="btn btn-danger"><i class="fas fa-edit mr-2"></i>New</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8" style="overflow-y:scroll;height: calc(100vh - 100px);background-color:rgb(227,227,227);padding-left:10%;padding-right:10%;">
+                <h5 class="text-secondary mt-2">PREVIEW</h5>
+                <div>
+                    <div class="card">
+                        <div class="card-body">
+                            <p id="preview_instruction" class="mb-0">Instruction is shown here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="cont_preview_client" class="preview_statement" style="margin-top: 50px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <img id="preview_client_avatar" src="asset/avatar1.png" height="50px" width="auto">
+                            <p id="preview_client_statement" class="mb-0">Statement content is shown here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="cont_preview_therapist" class="preview_solution" style="margin-top: 50px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <img id="preview_therapist_avatar" src="asset/avatar1.png" height="50px" width="auto">
+                            <p id="preview_therapist_statement" class="mb-0">Statement content is shown here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="preview_positive_message" class="alert alert-success" role="alert">
+                    <p class="mb-0">Positive message</p>
+                </div>
+                <div id="preview_negative_message" class="alert alert-danger" role="alert">
+                    <p class="mb-0">Negative message</p>
+                </div>
+                <div id="preview_hint_1_message" class="alert alert-info" role="alert">
+                    <p class="mb-0">Hint message</p>
+                </div>
+                <div id="preview_hint_2_message" class="alert alert-info" role="alert">
+                    <p class="mb-0">Hint message</p>
+                </div>
+                <div id="preview_hint_3_message" class="alert alert-info" role="alert">
+                    <p class="mb-0">Hint message</p>
+                </div>
+                <div id="preview_validation_message" class="alert alert-warning" role="alert">
+                    <p class="mb-0">Validation message</p>
+                </div>
+                <div id="cont_preview_response" class="card mb-3">
+                    <div class="card-body">
+                        <div id="cont_preview_radio_1" class="form-check">
+                          <input class="form-check-input" type="radio" name="preview_radio" id="preview_radio_1" value="option1">
+                          <label id="preview_radio_1_label" class="form-check-label" for="preview_radio_1">
+                            You’re just worn out
+                          </label>
+                        </div>
+                        <div id="cont_preview_radio_2" class="form-check mt-1">
+                          <input class="form-check-input" type="radio" name="preview_radio" id="preview_radio_2" value="option2">
+                          <label id="preview_radio_2_label" class="form-check-label" for="preview_radio_2">
+                            How did you sleep last night
+                          </label>
+                        </div>
+                        <div id="cont_preview_radio_3" class="form-check mt-1">
+                          <input class="form-check-input" type="radio" name="preview_radio" id="preview_radio_3" value="option3">
+                          <label id="preview_radio_3_label" class="form-check-label" for="preview_radio_3">
+                            Are you taking your medication
+                          </label>
+                        </div>
+                        <div id="cont_preview_radio_4" class="form-check mt-1">
+                          <input class="form-check-input" type="radio" name="preview_radio" id="preview_radio_4" value="option4">
+                          <label id="preview_radio_4_label" class="form-check-label" for="preview_radio_4">
+                            Are you taking your medication
+                          </label>
+                        </div>
+                        <div id="cont_preview_textarea" class="form-group">
+                            <textarea class="form-control" id="preview_textarea" rows="3" placeholder="Example textarea"></textarea>
+                        </div>
+                        <div class="btn-group-vertical w-100 mt-3" role="group" aria-label="Basic example">
+                          <button type="button" class="btn btn-danger">SUBMIT</button>
+                          <button type="button" class="btn btn-danger">HINT</button>
+                          <button type="button" class="btn btn-danger">REPEAT</button>
+                          <button type="button" class="btn btn-danger">NEXT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4" style="overflow-y:scroll;height: calc(100vh - 100px);">
+                <h5 class="text-secondary mt-2">PROPERTIES</h5>
+                <form>
+                    <div class="dropdown-divider"></div>
+                    <h5>MITutor Log Metadata</h5>
+                    <div class="form-group">
+                        <label for="input_session_id">Session</label>
+                        <input type="text" id="input_session_id" class="form-control" placeholder="" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="input_problem_id">Problem</label>
+                        <input type="text" id="input_problem_id" class="form-control" placeholder="" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="input_module">Module</label>
+                        <input type="text" id="input_module" class="form-control" placeholder="Identify Reflection">
+                    </div>
+                    <div class="form-group">
+                        <label for="input_instructor">Instructor</label>
+                        <input type="text" id="input_instructor" class="form-control" placeholder="Grin Lord">
+                    </div>
+                    <div class="form-group">
+                        <label for="input_condition">Condition</label>
+                        <input type="text" id="input_condition" class="form-control" placeholder="Treatment_2019_v3.0">
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <h5>Problem</h5>
+                    <div class="form-group">
+                        <label for="input_instruction">Add an instruction for how to solve the problem</label>
+                        <input type="text" id="input_instruction" class="form-control" placeholder="Try to rephrase what the therapist said by making a reflection">
+                    </div>
+                    <div class="form-group">
+                        <label for="input_response_kc">Choose the knowledge component related to the problem</label>
+                        <select id="input_response_kc" class="form-control">
+                            <option value="NA">Choose an option</option>
+                            <option value="reflection">Reflection</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="input_response_type">Choose the type of response</label>
+                        <select class="form-control" id="input_response_type">
+                            <!-- Update for true/false, multi-choice, and open-ended -->
+                          <option value="NA">Choose an option</option>
+                          <option value="TrueFalse">True/False items</option>
+                          <option value="Multi">Multi-choice items</option>
+                          <option value="Open">Open-ended item</option>
+                        </select>
+                    </div>
+                     <div id="cont_response_option_1" class="form-group">
+                        <label for="input_response_option_1">Option #1 label</label>
+                        <input type="text" id="input_response_option_1" class="form-control" placeholder="I think...">
+                    </div>
+                    <div id="cont_response_option_2" class="form-group">
+                        <label for="input_response_option_2">Option #2 label</label>
+                        <input type="text" id="input_response_option_2" class="form-control" placeholder="You should...">
+                    </div>
+                    <div id="cont_response_option_3" class="form-group">
+                        <label for="input_response_option_3">Option #3 label</label>
+                        <input type="text" id="input_response_option_3" class="form-control" placeholder="Try to...">
+                    </div>
+                    <div id="cont_response_option_4" class="form-group">
+                        <label for="input_response_option_4">Option #4 label</label>
+                        <input type="text" id="input_response_option_4" class="form-control" placeholder="It seems that...">
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <h5>Avatars</h5>
+                    <div id="cont_response_client_avatar" class="form-group">
+                        <label for="input_client_avatar">Choose client avatar</label>
+                        <select class="form-control" id="input_client_avatar">
+                          <option value="asset/avatar1.png">Avatar 1</option>
+                          <option value="asset/avatar2.png">Avatar 2</option>
+                          <option value="asset/avatar3.png">Avatar 3</option>
+                          <option value="asset/avatar4.png">Avatar 4</option>
+                          <option value="asset/avatar5.png">Avatar 5</option>
+                          <option value="asset/avatar6.png">Avatar 6</option>
+                          <option value="asset/avatar7.png">Avatar 7</option>
+                          <option value="asset/avatar8.png">Avatar 8</option>
+                          <option value="asset/avatar9.png">Avatar 9</option>
+                        </select>
+                      </div>
+                    <div id="cont_response_client_statement" class="form-group">
+                        <label for="input_client_statement">Client says...</label>
+                        <textarea class="form-control" id="input_client_statement" rows="2" placeholder="I feel like..."></textarea>
+                    </div>
+                    <div id="cont_response_therapist_avatar" class="form-group">
+                        <label for="input_therapist_avatar">Choose therapist avatar</label>
+                        <select class="form-control" id="input_therapist_avatar">
+                          <option value="asset/avatar1.png">Avatar 1</option>
+                          <option value="asset/avatar2.png">Avatar 2</option>
+                          <option value="asset/avatar3.png">Avatar 3</option>
+                          <option value="asset/avatar4.png">Avatar 4</option>
+                          <option value="asset/avatar5.png">Avatar 5</option>
+                          <option value="asset/avatar6.png">Avatar 6</option>
+                          <option value="asset/avatar7.png">Avatar 7</option>
+                          <option value="asset/avatar8.png">Avatar 8</option>
+                          <option value="asset/avatar9.png">Avatar 9</option>
+                        </select>
+                      </div>
+                    <div id="cont_response_therapist_statement" class="form-group">
+                        <label for="input_therapist_statement">Therapist says...</label>
+                        <textarea class="form-control" id="input_therapist_statement" rows="2" placeholder="It sounds like..."></textarea>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <h5>Pedagogical Content</h5>
+                    <div id="cont_input_answer_key" class="form-group">
+                        <label for="input_answer_key">Choose the correct response</label>
+                        <select class="form-control" id="input_answer_key">
+                            <!-- Update for true/false, multi-choice, and open-ended -->
+                          <option id="input_answer_key_NA" value="NA">Choose an option</option>
+                          <option id="input_answer_key_1" value="">Option 1</option>
+                          <option id="input_answer_key_2" value="">Option 2</option>
+                          <option id="input_answer_key_3" value="">Option 3</option>
+                          <option id="input_answer_key_4" value="">Option 4</option>
+                        </select>
+                    </div>
+                    <div id="cont_input_feedback_pos" class="form-group">
+                        <label for="input_feedback_pos">Positive feedback</label>
+                        <textarea class="form-control" id="input_feedback_pos" rows="2" placeholder="Well done, it seems that you correctly responded ... Here are a few additional examples..."></textarea>
+                    </div>
+                    <div id="cont_input_feedback_neg" class="form-group">
+                        <label for="input_feedback_neg">Negative feedback</label>
+                        <textarea class="form-control" id="input_feedback_neg" rows="2" placeholder="Well done, it seems that you incorrectly responded ... Here are a few suggestions..."></textarea>
+                    </div>
+                    <div id="cont_input_hint_1" class="form-group">
+                        <label for="input_hint_1">Hint #1</label>
+                        <textarea class="form-control" id="input_hint_1" rows="2" placeholder="You may want to try to..."></textarea>
+                    </div>
+                    <div id="cont_input_hint_2" class="form-group">
+                        <label for="input_hint_2">Hint #2</label>
+                        <textarea class="form-control" id="input_hint_2" rows="2" placeholder="You may also want to consider..."></textarea>
+                    </div>
+                    <div id="cont_input_hint_3" class="form-group">
+                        <label for="input_hint_3">Hint #3</label>
+                        <textarea class="form-control" id="input_hint_3" rows="2" placeholder="Try to do..."></textarea>
+                    </div>
+                    <div id="cont_input_validation" class="form-group">
+                        <label for="input_validation">Validation</label>
+                        <textarea class="form-control" id="input_validation" rows="2" placeholder="Oops it seems you haven't selected an answer... try again"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="section_midash" class="container-fluid d-none">
+        <div style="height: 50px" class="row justify-content-between">
+            <div class="col-1">
+                <h4 class="mb-0 mt-2 d-inline">MIDash</h4>
+            </div>
+            <div class="col-2">
+                <div class="btn-group float-right">
+                    <button id="btn_midash_curves" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-chart-line mr-2"></i>Learning Curves
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button id="btn_midash_bykc" class="dropdown-item" type="button">By Knowledge Component</button>
+                        <button id="btn_midash_bystudent" class="dropdown-item" type="button">By Student</button>
+                        <div class="dropdown-divider"></div>
+                        <button id="btn_midash_assistance" class="dropdown-item" type="button">Measure Assistance Score</button>
+                        <button id="btn_midash_error" class="dropdown-item" type="button">Error Rate</button>
+                        <button id="btn_midash_incorrect" class="dropdown-item" type="button">Number of Incorrects</button>
+                        <button id="btn_midash_hints" class="dropdown-item" type="button">Number of Hints</button>
+                        <button id="btn_midash_stepduration" class="dropdown-item" type="button">Step Duration</button>
+                        <button id="btn_midash_corstepduration" class="dropdown-item" type="button">Correct Step Duration</button>
+                        <button id="btn_midash_errorstepduration" class="dropdown-item" type="button">Error Step Duration</button>
+                        <div class="dropdown-divider"></div>
+                        <button id="btn_midash_learnmore" class="dropdown-item" type="button">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center" style="overflow-y:scroll;height: calc(100vh - 100px);background-color:rgb(227,227,227);">
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <input id="graph_search_query" type="text" class="form-control" placeholder="Search for a knowledge component" aria-describedby="btn_midash_search">
+                    <div class="input-group-append">
+                        <button class="btn btn-danger" type="button" id="btn_midash_search"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div id="cont_knowledge_components" class="list-group">
+                    <button id="graph_openquest" type="button" class="list-group-item list-group-item-action">Open Question</button>
+                    <button id="graph_closedquestquest" type="button" class="list-group-item list-group-item-action">Closed Question</button>
+                    <button id="graph_reflection" type="button" class="list-group-item list-group-item-action">Reflection</button>
+                    <button id="graph_affirm" type="button" class="list-group-item list-group-item-action">Affirm</button>
+                    <button id="graph_advisewithper" type="button" class="list-group-item list-group-item-action">Advise With Permission</button>
+                    <button id="graph_advisewithoutper" type="button" class="list-group-item list-group-item-action">Advise Without Permission</button>
+                    <button id="graph_confront" type="button" class="list-group-item list-group-item-action">Confront</button>
+                    <button id="graph_givinginfo" type="button" class="list-group-item list-group-item-action">Giving Information</button>
+                    <button id="graph_facilitate" type="button" class="list-group-item list-group-item-action">Facilitate</button>
+                    <button id="graph_structure" type="button" class="list-group-item list-group-item-action">Structure</button>
+                </div>
+                <div id="cont_students" class="list-group d-none">
+                    <button id="graph_student1" type="button" class="list-group-item list-group-item-action"></button>
+                    <button id="graph_student2" type="button" class="list-group-item list-group-item-action"></button>
+                    <button id="graph_student3" type="button" class="list-group-item list-group-item-action"></button>
+                    <button id="graph_student4" type="button" class="list-group-item list-group-item-action"></button>
+                    <button id="graph_student5" type="button" class="list-group-item list-group-item-action"></button>
+                    <button id="graph_student6" type="button" class="list-group-item list-group-item-action"></button>
+                    <button id="graph_student7" type="button" class="list-group-item list-group-item-action"></button>
+                    <button id="graph_student8" type="button" class="list-group-item list-group-item-action"></button>
+                    <button id="graph_student9" type="button" class="list-group-item list-group-item-action"></button>
+                    <button id="graph_student10" type="button" class="list-group-item list-group-item-action"></button>
+                </div>
+                <div id="cont_listgroup_controls" class="btn-group w-100 mt-2 d-none" role="group" aria-label="Basic example">
+                    <button id="btn_midash_previous" type="button" class="btn btn-danger" disabled><i class="fas fa-chevron-left mr-2"></i>Previous</button>
+                    <button id="btn_midash_next" type="button" class="btn btn-danger">Next<i class="fas fa-chevron-right ml-2"></i></button>
+                </div>
+            </div>
+            <div class="col-8">
+                <div id="chart"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="js/config.js"></script>
+    <script src="js/variable.js"></script>
+    <script src="js/data.js"></script>
+    <script src="api/CodeUtterances.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/listener.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

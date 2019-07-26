@@ -1,0 +1,47 @@
+#section_nav{
+    height: 50px;
+}
+
+#section_main{
+    height: calc(100vh - 50px);
+    background-color: rgb(227,227,227);
+    background-image: url("../asset/background.svg");
+    background-repeat: no-repeat;
+    background-size: 50% 50%;
+    background-position: bottom;
+}
+
+#section_dashboard{
+    height: calc(100vh - 50px);
+    background-color: rgb(227,227,227);
+}
+
+.preview_statement .card{
+    position: relative;
+    margin-left: 25px;
+    margin-right: 75px;
+    margin-bottom: 25px;
+}
+
+.preview_solution .card{
+    position: relative;
+    margin-left: 75px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+
+.preview_statement img{
+    position: absolute;
+    left: -25px;
+    top: -25px;
+}
+
+.preview_solution img{
+    position: absolute;
+    right: -25px;
+    top: -25px;
+}
+
+div.apexcharts-menu-icon svg{
+    fill: #dc3545 !important;
+}
